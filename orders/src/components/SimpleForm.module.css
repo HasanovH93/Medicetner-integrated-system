@@ -1,0 +1,10 @@
+.orderForm input[type="text"] {
+  padding: 15px 5px;
+}
+.orderForm input[type="email"] {
+  padding: 15px 5px;
+}
+
+.orderForm input[type="date"] {
+  color: black;
+}
