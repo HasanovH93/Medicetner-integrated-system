@@ -1,0 +1,106 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: width 0.3s;
+
+  .dashboardLogo {
+    margin-top: 10px;
+    margin-left: 30px;
+  }
+
+  &.collapsed {
+    width: 60px;
+
+    .sidebarList {
+      margin: 0;
+      padding: 0;
+
+      list-style: outside none none;
+      top: 50px;
+
+      .sidebarListItem {
+        .sidebarLink {
+          padding-left: 20px;
+          padding-right: 20px;
+
+          .sidebarIcon {
+            font-size: 18px;
+            margin: 0 auto;
+          }
+
+          .sidebarText {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .dashboardLogo {
+      display: none;
+    }
+
+    .toggleSidebar {
+      .toggleSidebarIcon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .sidebarList {
+    margin: 0;
+    padding: 0;
+
+    list-style: outside none none;
+    .sidebarListItem {
+      .sidebarLink {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        padding: 0 20px;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          background-color: #f5f5f5;
+        }
+
+        .sidebarIcon {
+          font-size: 18px;
+          margin-right: 10px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        .sidebarText {
+          font-size: 14px;
+          font-weight: 500;
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  .toggleSidebar {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    &:hover {
+      color: #007bff;
+    }
+
+    .toggleSidebarIcon {
+      transition: transform 0.3s;
+    }
+  }
+}
