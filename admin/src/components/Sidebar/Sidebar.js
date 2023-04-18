@@ -3,12 +3,10 @@ import { toggleSidebar } from "../../store/slices/sidebar-slice";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import {
-  MdDashboard,
-  MdAdd,
-  MdPeople,
-  MdProductionQuantityLimits,
-} from "react-icons/md";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import PeopleIcon from "@mui/icons-material/People";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
 import styles from "./Sidebar.module.scss";
 
 const Sidebar = () => {
@@ -51,26 +49,26 @@ const Sidebar = () => {
       <ul className={styles.sidebarList}>
         <li className={styles.sidebarListItem}>
           <Link to="/dashboard" className={styles.sidebarLink}>
-            <MdDashboard className={styles.sidebarIcon} />
+            <DashboardIcon className={styles.sidebarIcon} />
             <span className={styles.sidebarText}>Dashboard</span>
           </Link>
         </li>
         <li className={styles.sidebarListItem}>
           <Link to="/dashboard/all-products" className={styles.sidebarLink}>
-            <MdProductionQuantityLimits className={styles.sidebarIcon} />
-            <span className={styles.sidebarText}>Products</span>
-          </Link>
-        </li>
-        <li className={styles.sidebarListItem}>
-          <Link to="/dashboard/add-product" className={styles.sidebarLink}>
-            <MdAdd className={styles.sidebarIcon} />
-            <span className={styles.sidebarText}>Add Product</span>
+            <Inventory2Icon className={styles.sidebarIcon} />
+            <span className={styles.sidebarText}>Bestellungen</span>
           </Link>
         </li>
         <li className={styles.sidebarListItem}>
           <Link to="/admin-panel/users" className={styles.sidebarLink}>
-            <MdPeople className={styles.sidebarIcon} />
+            <PeopleIcon className={styles.sidebarIcon} />
             <span className={styles.sidebarText}>Users</span>
+          </Link>
+        </li>
+        <li className={styles.sidebarListItem}>
+          <Link to="/dashboard/add-product" className={styles.sidebarLink}>
+            <AddCircleOutlineIcon className={styles.sidebarIcon} />
+            <span className={styles.sidebarText}>Add User</span>
           </Link>
         </li>
       </ul>

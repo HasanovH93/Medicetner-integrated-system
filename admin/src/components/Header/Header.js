@@ -17,7 +17,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const sidebarOpen = useSelector((state) => state.sidebar.sidebarOpen);
-
+  const userData = useSelector((state) => state.auth.userData);
   const handleToggleSidebar = () => {
     dispatch(toggleSidebar());
   };
@@ -25,7 +25,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(clearUserToken());
   };
-
+  console.log(userData.imageUrl);
   return (
     <AppBar
       position="sticky"
@@ -51,12 +51,14 @@ const Header = () => {
         </Typography>
         <Box display="flex" alignItems="center">
           <Box style={{ marginRight: 16, color: "#000" }}>
-            <Typography variant="subtitle1">Hey Bahtyar</Typography>
+            <Typography variant="subtitle1">
+              Hey, {userData.username}
+            </Typography>
             <Typography variant="subtitle2">admin</Typography>
           </Box>
           <Avatar
             alt="Baho"
-            src="https://example.com/profile-picture.jpg"
+            src={userData.imageUrl}
             style={{ marginRight: 16, color: "#000" }}
           />
           <IconButton color="inherit" onClick={handleLogout}>

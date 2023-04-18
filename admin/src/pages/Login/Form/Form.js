@@ -10,7 +10,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { login } from "../../../api";
-import { setUserToken } from "../../../store/slices/auth-slice";
+import { setUserToken, setUserData } from "../../../store/slices/auth-slice";
 
 const validationSchema = yup.object({
   email: yup
@@ -44,6 +44,7 @@ const Form = () => {
           expiresIn: response.expiresIn,
         })
       );
+      dispatch(setUserData(response.userData));
       navigate("/dashboard");
     } catch (error) {
       console.error("Error during login:", error);
