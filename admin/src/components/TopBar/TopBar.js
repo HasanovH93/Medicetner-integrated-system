@@ -15,7 +15,10 @@ const Topbar = () => {
         component="a"
         href="/"
         title="Praxis-Kerim"
-        width={{ xs: 100, md: 120 }}
+        width={{ xs: 150, md: 170 }}
+        sx={{
+          pl: { xs: 0, md: 0 }, // Add responsive padding values
+        }}
       >
         <Box
           component={"img"}
