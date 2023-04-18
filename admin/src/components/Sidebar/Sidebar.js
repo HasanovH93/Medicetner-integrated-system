@@ -8,6 +8,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import PeopleIcon from "@mui/icons-material/People";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import styles from "./Sidebar.module.scss";
 
 const Sidebar = () => {
@@ -64,6 +65,12 @@ const Sidebar = () => {
           <Link to="/dashboard/all-products" className={styles.sidebarLink}>
             <CalendarMonthIcon className={styles.sidebarIcon} />
             <span className={styles.sidebarText}>Termine</span>
+          </Link>
+        </li>
+        <li className={styles.sidebarListItem}>
+          <Link to="/dashboard/all-products" className={styles.sidebarLink}>
+            <EmojiPeopleIcon className={styles.sidebarIcon} />
+            <span className={styles.sidebarText}>Patienten</span>
           </Link>
         </li>
         <li className={styles.sidebarListItem}>
