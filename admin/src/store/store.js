@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import sidebarSlice from "./slices/sidebar-slice";
+import authReducer, { setUserToken, clearUserToken } from "./slices/auth-slice";
 
 const persistConfig = {
   key: "flone",
@@ -20,7 +21,19 @@ const persistConfig = {
 
 export const rootReducer = combineReducers({
   sidebar: sidebarSlice,
+  auth: authReducer,
 });
+
+const autoLogoutMiddleware = (store) => (next) => (action) => {
+  if (action.type === "auth/setUserToken") {
+    const { expiresIn } = action.payload;
+    setTimeout(() => {
+      store.dispatch(clearUserToken());
+    }, expiresIn * 1000);
+  }
+
+  return next(action);
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -31,7 +44,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(autoLogoutMiddleware), // Add the autoLogoutMiddleware here
 });
 
 export const persistor = persistStore(store);

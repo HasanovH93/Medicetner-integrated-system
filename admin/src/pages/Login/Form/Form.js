@@ -1,5 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Box from "@mui/material/Box";
@@ -7,6 +9,8 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { login } from "../../../api";
+import { setUserToken } from "../../../store/slices/auth-slice";
 
 const validationSchema = yup.object({
   email: yup
@@ -17,17 +21,33 @@ const validationSchema = yup.object({
   password: yup
     .string()
     .required("Please specify your password")
-    .min(8, "The password should have at minimum length of 8"),
+    .min(6, "The password should have at minimum length of 8"),
 });
 
 const Form = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const initialValues = {
     email: "",
     password: "",
   };
 
-  const onSubmit = (values) => {
-    return values;
+  const onSubmit = async (values) => {
+    try {
+      console.log(values);
+      const { email, password } = values;
+      const response = await login(email, password);
+      console.log(response.userData);
+      dispatch(
+        setUserToken({
+          token: response.token,
+          expiresIn: response.expiresIn,
+        })
+      );
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
   };
 
   const formik = useFormik({

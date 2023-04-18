@@ -1,3 +1,5 @@
+import ProtectedLoginPage from "../components/ProtectedRoute/ProtectedLogin";
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import Dashboard from "./Dashboard/Dashboard";
 import Login from "./Login/Login";
 
@@ -6,7 +8,7 @@ import ProductList from "./Products/Products";
 const adminRoutes = [
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <ProtectedRoute component={Dashboard} />,
     children: [
       {
         path: "all-products",
@@ -16,7 +18,7 @@ const adminRoutes = [
   },
   {
     path: "/",
-    element: <Login />,
+    element: <ProtectedLoginPage component={Login} />,
   },
 ];
 
