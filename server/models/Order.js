@@ -1,20 +1,29 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const arbeitsunfaehigkeitsbescheinigungSchema = new Schema({
-  dateFrom: String,
-  dateTo: String,
-  grund: String,
-});
+const arbeitsunfaehigkeitsbescheinigungSchema = new Schema(
+  {
+    dateFrom: String,
+    dateTo: String,
+    grund: String,
+  },
+  { _id: false }
+);
 
-const heilmittelSchema = new Schema({
-  therapie: String,
-});
+const heilmittelSchema = new Schema(
+  {
+    therapie: String,
+    grund: String,
+  },
+  { _id: false }
+);
+
 
 const chosenCheckboxesSchema = new Schema(
   {
     arbeitsunfähigkeitsbescheinigung: arbeitsunfaehigkeitsbescheinigungSchema,
     Heilmittel: heilmittelSchema,
+    Medikamente: Schema.Types.Mixed,
   },
   { _id: false }
 );

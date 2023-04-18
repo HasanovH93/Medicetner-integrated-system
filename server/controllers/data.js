@@ -1,4 +1,9 @@
-const { create, getAll } = require("../services/item");
+const {
+  create,
+  getAll,
+  getOrderById,
+  deleteById,
+} = require("../services/item");
 const { parseError } = require("../util/parser");
 const { s3UploadImg } = require("../middlewares/imagesUpload");
 
@@ -7,6 +12,7 @@ const dataController = require("express").Router();
 dataController.post("/create", s3UploadImg(), async (req, res) => {
   try {
     req.body = JSON.parse(JSON.stringify(req.body));
+    console.log(req.body.chosenCheckboxes);
     const createdOrder = await create(req.body);
 
     res
@@ -27,6 +33,29 @@ dataController.get("/all-orders", async (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     const message = parseError(message);
+    res.status(400).json({ message });
+  }
+});
+
+dataController.get("/single/:id", async (req, res) => {
+  console.log(req);
+  try {
+    const id = req.params.id;
+    const data = await getOrderById(id);
+    res.status(200).send({ data });
+  } catch (error) {
+    const message = parseError(error);
+    res.status(400).json({ message });
+  }
+});
+
+dataController.delete("/single/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await deleteById(id);
+    res.status(200).send({ data });
+  } catch (error) {
+    const message = parseError(error);
     res.status(400).json({ message });
   }
 });
