@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 
 const Topbar = () => {
-  const imageUrl = "/assets/logo1.jpg";
+  const imageUrl = "/assets/logo1.png";
   return (
     <Box
       display={"flex"}

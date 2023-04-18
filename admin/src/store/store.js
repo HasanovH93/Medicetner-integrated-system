@@ -11,10 +11,14 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import sidebarSlice from "./slices/sidebar-slice";
-import authReducer, { setUserToken, clearUserToken } from "./slices/auth-slice";
+import authReducer, {
+  setUserToken,
+  setUserData,
+  clearUserToken,
+} from "./slices/auth-slice";
 
 const persistConfig = {
-  key: "flone",
+  key: "praxisKerim",
   version: 1.1,
   storage,
 };
