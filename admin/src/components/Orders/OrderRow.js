@@ -24,8 +24,8 @@ const OrderRow = ({ order }) => {
         <TableCell>{order.email}</TableCell>
         <TableCell>{order.dateofbirth}</TableCell>
         <TableCell>
-          <Button variant="contained" color="primary">
-            Edit
+          <Button variant="contained" color="info" onClick={handleViewClick}>
+            View
           </Button>
         </TableCell>
         <TableCell>
@@ -35,11 +35,6 @@ const OrderRow = ({ order }) => {
             onClick={() => handleDeleteProduct(order._id)}
           >
             Delete
-          </Button>
-        </TableCell>
-        <TableCell>
-          <Button variant="contained" color="info" onClick={handleViewClick}>
-            View
           </Button>
         </TableCell>
       </TableRow>
