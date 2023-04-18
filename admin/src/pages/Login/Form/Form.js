@@ -34,10 +34,8 @@ const Form = () => {
 
   const onSubmit = async (values) => {
     try {
-      console.log(values);
       const { email, password } = values;
       const response = await login(email, password);
-      console.log(response.userData);
       dispatch(
         setUserToken({
           token: response.token,

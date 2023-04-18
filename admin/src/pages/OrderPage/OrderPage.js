@@ -1,24 +1,20 @@
-import { useParams } from "react-router-dom";
-
-import OrderCard from "./OrderCard";
+import OrderCard from "../SingleOrder/SingleOrder";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import styles from "./OrderPage.module.scss";
 
 const OrderCardPage = () => {
-  const { id } = useParams();
   const { orders } = useSelector((state) => state.order);
+  const sidebarOpen = useSelector((state) => state.sidebar.sidebarOpen);
+  const { id } = useParams();
 
-  const filteredOrder = orders.filter(
-    (order) => order.id === "643d2fe1f3e39626bf4b604c"
-  );
+  const filteredOrder = orders.find((order) => order._id === id);
   console.log(filteredOrder);
-
   return (
-    <div>
-      {filteredOrder ? (
-        <OrderCard order={filteredOrder} />
-      ) : (
-        <p>Loading order data...</p>
-      )}
+    <div
+      className={`${styles.container} ${sidebarOpen ? "" : styles.sidebarOpen}`}
+    >
+      <OrderCard order={filteredOrder} />
     </div>
   );
 };

@@ -2,9 +2,9 @@ import ProtectedLoginPage from "../components/ProtectedRoute/ProtectedLogin";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import Dashboard from "./Dashboard/Dashboard";
 import Login from "./Login/Login";
+import OrderCardPage from "./OrderPage/OrderPage";
 
 import ProductList from "./Products/Products";
-import OrderCard from "./SingleOrder/SingleOrder";
 
 const adminRoutes = [
   {
@@ -14,6 +14,10 @@ const adminRoutes = [
       {
         path: "all-products",
         element: <ProductList />,
+      },
+      {
+        path: "orders/:id",
+        element: <OrderCardPage />,
       },
     ],
   },

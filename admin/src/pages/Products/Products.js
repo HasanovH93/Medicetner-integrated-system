@@ -1,13 +1,17 @@
 import styles from "./Products.module.scss";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import OrderList from "../../components/Orders/OrderList";
-import { useParams } from "react-router-dom";
+import { fetchOrders } from "../../store/slices/orders-slice";
 const ProductPage = () => {
+  const dispatch = useDispatch();
   const sidebarOpen = useSelector((state) => state.sidebar.sidebarOpen);
   const { orders } = useSelector((state) => state.order);
-  const { id } = useParams();
-  console.log(id);
 
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
   return (
     <div
       className={`${styles.container} ${sidebarOpen ? "" : styles.sidebarOpen}`}

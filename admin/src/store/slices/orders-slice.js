@@ -1,14 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchAllOrders } from "../../api";
+import { deleteOrderById, fetchAllOrders } from "../../api";
 
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
   async (_, { dispatch }) => {
     const orders = await fetchAllOrders();
-    console.log(orders);
     dispatch(setOrders(orders));
   }
 );
+
+export const deleteProduct = createAsyncThunk(
+  "orders/deleteProduct",
+  async (id, { dispatch }) => {
+    await deleteOrderById(id);
+    dispatch(fetchOrders());
+  }
+);
+
 const orderSlice = createSlice({
   name: "orders",
   initialState: {
@@ -16,7 +24,6 @@ const orderSlice = createSlice({
   },
   reducers: {
     setOrders(state, action) {
-      console.log("orderstate", action.payload);
       state.orders = action.payload;
     },
   },

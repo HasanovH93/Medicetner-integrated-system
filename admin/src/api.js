@@ -11,6 +11,16 @@ export const fetchAllOrders = async () => {
   }
 };
 
+export const deleteOrderById = async (id) => {
+  console.log(id);
+  try {
+    const response = await axiosInstance.delete(`/orders/single/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting product:", error);
+  }
+};
+
 export const login = async (email, password) => {
   try {
     const response = await axiosInstance.post(`${API_URL}/users/login`, {
@@ -27,9 +37,7 @@ export const login = async (email, password) => {
 export const fetchOrder = async (orderId, setOrder) => {
   try {
     console.log(orderId);
-    const response = await axiosInstance.get(
-      `http://localhost:3030/orders/single/${orderId}`
-    );
+    const response = await axiosInstance.get(`${API_URL}/single/${orderId}`);
     setOrder(response.data.data);
   } catch (error) {
     console.error("Error fetching order data:", error);

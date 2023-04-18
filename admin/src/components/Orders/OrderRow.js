@@ -1,13 +1,19 @@
 import { Button, TableCell, TableRow } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../store/slices/orders-slice";
 
 const OrderRow = ({ order }) => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleViewClick = () => {
     const id = order._id;
 
-    navigate(`/orders/${id}`);
+    navigate(`/dashboard/orders/${id}`);
+  };
+
+  const handleDeleteProduct = (id) => {
+    dispatch(deleteProduct(id));
   };
 
   return (
@@ -23,7 +29,11 @@ const OrderRow = ({ order }) => {
           </Button>
         </TableCell>
         <TableCell>
-          <Button variant="contained" color="error">
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => handleDeleteProduct(order._id)}
+          >
             Delete
           </Button>
         </TableCell>

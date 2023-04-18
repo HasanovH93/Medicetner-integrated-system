@@ -9,10 +9,8 @@ import {
 } from "@mui/material";
 
 const OrderCard = ({ order }) => {
-  if (!order) {
-    return <p>Loading order data...</p>;
-  }
-
+  console.log(order);
+  console.log("order", order.chosenCheckboxes);
   return (
     <Card sx={{ minWidth: 700, maxWidth: 1200, mb: 4 }}>
       <CardHeader
