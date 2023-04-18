@@ -4,8 +4,6 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import AppBar from "@mui/material/AppBar";
 
-import Container from "../components/Container";
-
 import TopBar from "../components/TopBar/TopBar";
 
 const Main = ({ children }) => {
@@ -21,9 +19,7 @@ const Main = ({ children }) => {
         }}
         elevation={0}
       >
-        <Container paddingY={1}>
-          <TopBar />
-        </Container>
+        <TopBar />
       </AppBar>
       <main>
         {children}
