@@ -10,3 +10,12 @@
 .sidebarOpen {
   margin-left: 240px; /* Adjust this value to match your sidebar width */
 }
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: calc(100% - 70px);
+  }
+
+  .sidebarOpen {
+    margin-left: 90px;
+  }
+}

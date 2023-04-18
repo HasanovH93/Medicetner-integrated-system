@@ -1,29 +1,39 @@
-import { Table } from "react-bootstrap";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import OrderRow from "./OrderRow";
 
 const OrderList = ({ orders }) => {
   if (!Array.isArray(orders)) {
     return null;
   }
-  console.log(orders)
+  console.log(orders);
   return (
-    <Table responsive striped bordered hover>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Vorname</th>
-          <th>Email</th>
-          <th>Geburtsdatum</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        {orders?.map((order) => (
-          <OrderRow key={order._id} order={order} />
-        ))}
-      </tbody>
-    </Table>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="order table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell>Vorname</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Geburtsdatum</TableCell>
+            <TableCell>Edit</TableCell>
+            <TableCell>Delete</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {orders?.map((order) => (
+            <OrderRow key={order._id} order={order} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

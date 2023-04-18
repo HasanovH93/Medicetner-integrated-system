@@ -1,21 +1,23 @@
-import { Button } from "react-bootstrap";
+import { Button, TableCell, TableRow } from "@mui/material";
 
 const OrderRow = ({ order }) => {
   return (
-    <tr>
-      <td>
-        <td>{order.firstName}</td>
-      </td>
-      <td>{order.secondName}</td>
-      <td>{order.email}</td>
-      <td>{order.dateofbirth}</td>
-      <td>
-        <Button variant="primary">Edit</Button>
-      </td>
-      <td>
-        <Button variant="danger">Delete</Button>
-      </td>
-    </tr>
+    <TableRow>
+      <TableCell>{order.firstName}</TableCell>
+      <TableCell>{order.secondName}</TableCell>
+      <TableCell>{order.email}</TableCell>
+      <TableCell>{order.dateofbirth}</TableCell>
+      <TableCell>
+        <Button variant="contained" color="primary">
+          Edit
+        </Button>
+      </TableCell>
+      <TableCell>
+        <Button variant="contained" color="error">
+          Delete
+        </Button>
+      </TableCell>
+    </TableRow>
   );
 };
 
