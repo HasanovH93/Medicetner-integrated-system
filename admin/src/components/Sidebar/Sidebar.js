@@ -17,19 +17,12 @@ const Sidebar = () => {
     dispatch(toggleSidebar());
   };
 
-  const imageUrl = "/assets/logo.png";
-
   return (
     <div
       className={`${styles.sidebar}${
         isCollapsed ? ` ${styles.collapsed}` : ""
       }`}
     >
-      {/* <div className={styles.dashboardLogo}>
-        <Link to={process.env.PUBLIC_URL + "/"}>
-          <img alt="" src={process.env.PUBLIC_URL + imageUrl} />
-        </Link>
-      </div> */}
       <ul className={styles.sidebarList}>
         <li className={styles.sidebarListItem}>
           <Link to="/dashboard" className={styles.sidebarLink}>
