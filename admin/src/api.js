@@ -23,3 +23,15 @@ export const login = async (email, password) => {
     throw error;
   }
 };
+
+export const fetchOrder = async (orderId, setOrder) => {
+  try {
+    console.log(orderId);
+    const response = await axiosInstance.get(
+      `http://localhost:3030/orders/single/${orderId}`
+    );
+    setOrder(response.data.data);
+  } catch (error) {
+    console.error("Error fetching order data:", error);
+  }
+};

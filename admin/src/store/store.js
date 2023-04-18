@@ -16,6 +16,7 @@ import authReducer, {
   setUserData,
   clearUserToken,
 } from "./slices/auth-slice";
+import ordersSlice from "./slices/orders-slice";
 
 const persistConfig = {
   key: "praxisKerim",
@@ -26,6 +27,7 @@ const persistConfig = {
 export const rootReducer = combineReducers({
   sidebar: sidebarSlice,
   auth: authReducer,
+  order: ordersSlice,
 });
 
 const autoLogoutMiddleware = (store) => (next) => (action) => {

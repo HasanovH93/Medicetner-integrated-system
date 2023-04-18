@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import Login from "./Login/Login";
 
 import ProductList from "./Products/Products";
+import OrderCard from "./SingleOrder/SingleOrder";
 
 const adminRoutes = [
   {

@@ -13,7 +13,6 @@ const OrderList = ({ orders }) => {
   if (!Array.isArray(orders)) {
     return null;
   }
-  console.log(orders);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="order table">
