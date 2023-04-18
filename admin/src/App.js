@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./Routes";
+import { ThemeProvider } from "react-bootstrap";
+import theme from "./theme/theme";
 
 function App() {
   return (

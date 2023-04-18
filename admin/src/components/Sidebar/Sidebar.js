@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar } from "../../store/slices/sidebar-slice";
+import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
@@ -13,24 +14,28 @@ import styles from "./Sidebar.module.scss";
 const Sidebar = () => {
   const isCollapsed = useSelector((state) => state.sidebar.sidebarOpen);
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const handleToggleSidebar = () => {
     dispatch(toggleSidebar());
   };
-  const imageUrl = "/assets/logo1.jpg";
-
+  const imageUrl = "/assets/logo1.png";
+  const boxWidth = isCollapsed ? 30 : 65;
   return (
     <div
       className={`${styles.sidebar}${
         isCollapsed ? ` ${styles.collapsed}` : ""
       }`}
+      style={{
+        borderRight: `1px solid ${theme.palette.grey[300]}`,
+      }}
     >
       <Box
         display={"flex"}
         component="a"
         href="/"
         title="Praxis-Kerim"
-        width={{ xs: 20, md: 45 }}
+        width={{ xs: 20, md: boxWidth }}
         sx={{
           mt: 1,
           ml: 1,
