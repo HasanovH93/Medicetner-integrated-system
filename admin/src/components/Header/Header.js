@@ -25,7 +25,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(clearUserToken());
   };
-  console.log(userData.imageUrl);
+
   return (
     <AppBar
       position="sticky"
@@ -40,29 +40,48 @@ const Header = () => {
       <Toolbar>
         <IconButton
           edge="start"
-          style={{ marginRight: 16 }}
+          sx={{ marginRight: 2 }}
           color="inherit"
           onClick={handleToggleSidebar}
         >
-          <MenuIcon style={{ color: "#000" }} />
+          <MenuIcon sx={{ color: "#000" }} />
         </IconButton>
-        <Typography variant="h6" style={{ flexGrow: 1, textAlign: "center" }}>
-          App Title
+        <Typography
+          variant="h6"
+          sx={{
+            flexGrow: 1,
+            textAlign: "center",
+            color: "#000",
+            "@media (max-width: 600px)": {
+              display: "none",
+            },
+          }}
+        >
+          Praxis Kerim
         </Typography>
         <Box display="flex" alignItems="center">
-          <Box style={{ marginRight: 16, color: "#000" }}>
+          <Box sx={{ marginRight: 2, color: "#000" }}>
             <Typography variant="subtitle1">
               Hey, {userData.username}
             </Typography>
-            <Typography variant="subtitle2">admin</Typography>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                "@media (max-width: 600px)": {
+                  display: "none",
+                },
+              }}
+            >
+              admin
+            </Typography>
           </Box>
           <Avatar
-            alt="Baho"
+            alt="User"
             src={userData.imageUrl}
-            style={{ marginRight: 16, color: "#000" }}
+            sx={{ marginRight: 2, color: "#000" }}
           />
           <IconButton color="inherit" onClick={handleLogout}>
-            <LogoutIcon style={{ color: "#000" }} />
+            <LogoutIcon sx={{ color: "#000" }} />
           </IconButton>
         </Box>
       </Toolbar>
