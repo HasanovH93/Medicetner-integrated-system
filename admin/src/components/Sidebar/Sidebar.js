@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar } from "../../store/slices/sidebar-slice";
+import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
   MdDashboard,
@@ -16,6 +17,7 @@ const Sidebar = () => {
   const handleToggleSidebar = () => {
     dispatch(toggleSidebar());
   };
+  const imageUrl = "/assets/logo1.jpg";
 
   return (
     <div
@@ -23,6 +25,24 @@ const Sidebar = () => {
         isCollapsed ? ` ${styles.collapsed}` : ""
       }`}
     >
+      <Box
+        display={"flex"}
+        component="a"
+        href="/"
+        title="Praxis-Kerim"
+        width={{ xs: 20, md: 45 }}
+        sx={{
+          mt: 1,
+          ml: 1,
+        }}
+      >
+        <Box
+          component={"img"}
+          src={process.env.PUBLIC_URL + imageUrl}
+          height={1}
+          width={1}
+        />
+      </Box>
       <ul className={styles.sidebarList}>
         <li className={styles.sidebarListItem}>
           <Link to="/dashboard" className={styles.sidebarLink}>
