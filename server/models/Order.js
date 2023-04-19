@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const arbeitsunfaehigkeitsbescheinigungSchema = new Schema(
+const auSchema = new Schema(
   {
     dateFrom: String,
     dateTo: String,
@@ -18,11 +18,10 @@ const heilmittelSchema = new Schema(
   { _id: false }
 );
 
-
 const chosenCheckboxesSchema = new Schema(
   {
-    arbeitsunfähigkeitsbescheinigung: arbeitsunfaehigkeitsbescheinigungSchema,
-    Heilmittel: heilmittelSchema,
+    Arbeitsunfähigkeitsbescheinigung: auSchema,
+    Heilmittelverordnung: heilmittelSchema,
     Medikamente: Schema.Types.Mixed,
   },
   { _id: false }
@@ -37,6 +36,8 @@ const orderSchema = new Schema({
   street: String,
   city: String,
   postcode: String,
+  status: String,
+  createdAt: Date,
   chosenCheckboxes: [chosenCheckboxesSchema],
 });
 

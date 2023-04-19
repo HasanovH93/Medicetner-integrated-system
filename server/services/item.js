@@ -27,4 +27,8 @@ async function deleteById(id) {
   return result;
 }
 
-module.exports = { create, getAll, getOrderById, deleteById };
+async function updateStatusById(id, status) {
+  return await Order.findByIdAndUpdate(id, { status }, { new: true }).lean();
+}
+
+module.exports = { create, getAll, getOrderById, deleteById, updateStatusById };

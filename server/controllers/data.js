@@ -3,6 +3,7 @@ const {
   getAll,
   getOrderById,
   deleteById,
+  updateStatusById,
 } = require("../services/item");
 const { parseError } = require("../util/parser");
 const { s3UploadImg } = require("../middlewares/imagesUpload");
@@ -12,7 +13,9 @@ const dataController = require("express").Router();
 dataController.post("/create", s3UploadImg(), async (req, res) => {
   try {
     req.body = JSON.parse(JSON.stringify(req.body));
-    console.log(req.body.chosenCheckboxes);
+    req.body.status = "Pending";
+    req.body.createdAt = new Date().toISOString();
+
     const createdOrder = await create(req.body);
 
     res
@@ -54,6 +57,23 @@ dataController.delete("/single/:id", async (req, res) => {
     const id = req.params.id;
     const data = await deleteById(id);
     res.status(200).send({ data });
+  } catch (error) {
+    const message = parseError(error);
+    res.status(400).json({ message });
+  }
+});
+
+dataController.patch("/single/:id", async (req, res) => {
+  console.log(req);
+  try {
+    const id = req.params.id;
+    const { status } = req.body;
+    const updatedOrder = await updateStatusById(id, status);
+    console.log(updatedOrder);
+    res.status(200).json({
+      message: "Order status updated successfully",
+      data: updatedOrder,
+    });
   } catch (error) {
     const message = parseError(error);
     res.status(400).json({ message });
