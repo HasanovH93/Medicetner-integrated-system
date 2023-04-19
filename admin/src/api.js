@@ -34,34 +34,19 @@ export const login = async (email, password) => {
   }
 };
 
-export const updateOrderStatus = async (orderId, status) => {
-  console.log(orderId);
-  console.log(API_URL);
-  try {
-    const response = await axiosInstance.patch(
-      `${API_URL}/orders/single/${orderId}`,
-      {
-        status,
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error updating order status:", error);
-    throw error;
-  }
-};
+export const updateOrder = async (orderId, status, comment) => {
+  const data = {};
+  if (status) data.status = status;
+  if (comment) data.comment = comment;
 
-export const updateOrderComment = async (orderId, comment) => {
   try {
     const response = await axiosInstance.patch(
       `${API_URL}/orders/single/${orderId}`,
-      {
-        comment,
-      }
+      data
     );
     return response.data;
   } catch (error) {
-    console.error("Error updating order comment:", error);
+    console.error("Error updating order:", error);
     throw error;
   }
 };

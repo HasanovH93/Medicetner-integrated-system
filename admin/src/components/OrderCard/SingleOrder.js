@@ -33,9 +33,8 @@ import {
 import { deepOrange, green } from "@mui/material/colors";
 import { useDispatch } from "react-redux";
 import {
-  addCommentToOrder,
   deleteProduct,
-  updateOrderStatusInStore,
+  updateOrderInStore,
 } from "../../store/slices/orders-slice"; // Update this import
 
 const OrderCard = ({ order }) => {
@@ -60,26 +59,25 @@ const OrderCard = ({ order }) => {
   const handleApprove = async () => {
     try {
       const updatedStatus = "Approved";
-      dispatch(
-        updateOrderStatusInStore({ id: order._id, status: updatedStatus })
-      );
+      dispatch(updateOrderInStore({ id: order._id, status: updatedStatus }));
     } catch (error) {
       console.error("Error updating order status:", error);
+    }
+  };
+
+  const handleAddComment = async () => {
+    console.log("Comment added:", comment);
+    try {
+      dispatch(updateOrderInStore({ id: order._id, comment }));
+      setIsCommentVisible(true);
+    } catch (error) {
+      console.error("Error updating comment:", error);
     }
   };
 
   const handleDelete = (id) => {
     dispatch(deleteProduct(id));
     navigate("/dashboard/all-products");
-  };
-  const handleAddComment = async () => {
-    console.log("Comment added:", comment);
-    try {
-      dispatch(addCommentToOrder({ id: order._id, comment }));
-      setIsCommentVisible(true);
-    } catch (error) {
-      console.error("Error updating comment:", error);
-    }
   };
 
   const handleEditComment = () => {
