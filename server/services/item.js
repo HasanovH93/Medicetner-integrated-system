@@ -27,8 +27,26 @@ async function deleteById(id) {
   return result;
 }
 
-async function updateStatusById(id, status) {
-  return await Order.findByIdAndUpdate(id, { status }, { new: true }).lean();
-}
+const updateStatusById = async (id, status, comment) => {
+  try {
+    const updateObject = {};
+    if (status) updateObject.status = status;
+    if (comment) updateObject.comment = comment;
+
+    const updatedOrder = await Order.findByIdAndUpdate(id, updateObject, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updatedOrder) {
+      throw new Error("Order not found");
+    }
+
+    return updatedOrder;
+  } catch (error) {
+    console.error("Error updating order status:", error);
+    throw error;
+  }
+};
 
 module.exports = { create, getAll, getOrderById, deleteById, updateStatusById };

@@ -38,6 +38,7 @@ const orderSchema = new Schema({
   postcode: String,
   status: String,
   createdAt: Date,
+  comment: String,
   chosenCheckboxes: [chosenCheckboxesSchema],
 });
 

@@ -64,14 +64,12 @@ dataController.delete("/single/:id", async (req, res) => {
 });
 
 dataController.patch("/single/:id", async (req, res) => {
-  console.log(req);
   try {
     const id = req.params.id;
-    const { status } = req.body;
-    const updatedOrder = await updateStatusById(id, status);
-    console.log(updatedOrder);
+    const { status, comment } = req.body;
+    const updatedOrder = await updateStatusById(id, status, comment); // Pass the comment here
     res.status(200).json({
-      message: "Order status updated successfully",
+      message: "Order updated successfully",
       data: updatedOrder,
     });
   } catch (error) {
