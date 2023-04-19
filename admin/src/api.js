@@ -50,3 +50,18 @@ export const updateOrderStatus = async (orderId, status) => {
     throw error;
   }
 };
+
+export const updateOrderComment = async (orderId, comment) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API_URL}/orders/single/${orderId}`,
+      {
+        comment,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating order comment:", error);
+    throw error;
+  }
+};

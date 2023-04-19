@@ -33,12 +33,14 @@ import {
 import { deepOrange, green } from "@mui/material/colors";
 import { useDispatch } from "react-redux";
 import {
+  addCommentToOrder,
   deleteProduct,
   updateOrderStatusInStore,
 } from "../../store/slices/orders-slice"; // Update this import
 
 const OrderCard = ({ order }) => {
   const [comment, setComment] = useState("");
+  const [isCommentVisible, setIsCommentVisible] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -70,9 +72,18 @@ const OrderCard = ({ order }) => {
     dispatch(deleteProduct(id));
     navigate("/dashboard/all-products");
   };
-  const handleAddComment = () => {
+  const handleAddComment = async () => {
     console.log("Comment added:", comment);
-    // Add your logic for adding the comment
+    try {
+      dispatch(addCommentToOrder({ id: order._id, comment }));
+      setIsCommentVisible(true);
+    } catch (error) {
+      console.error("Error updating comment:", error);
+    }
+  };
+
+  const handleEditComment = () => {
+    setIsCommentVisible(false);
   };
 
   const formatDate = (date) => {
@@ -203,23 +214,27 @@ const OrderCard = ({ order }) => {
         }}
       >
         <Box sx={{ width: "100%", maxWidth: 450 }}>
-          <TextField
-            label="Comment"
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={2}
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            inputProps={{ style: { minHeight: "2em" } }}
-          />
+          {!isCommentVisible ? (
+            <Typography variant="body1">{order.comment}</Typography>
+          ) : (
+            <TextField
+              label="Comment"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={2}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              inputProps={{ style: { minHeight: "2em" } }}
+            />
+          )}
           <Button
             variant="contained"
             color="primary"
-            onClick={handleAddComment}
+            onClick={isCommentVisible ? handleEditComment : handleAddComment}
             sx={{ marginTop: 1 }}
           >
-            Add
+            {isCommentVisible ? "Edit Comment" : "Add Comment"}
           </Button>
         </Box>
         <Box>

@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteOrderById, fetchAllOrders, updateOrderStatus } from "../../api";
+import {
+  deleteOrderById,
+  fetchAllOrders,
+  updateOrderComment,
+  updateOrderStatus,
+} from "../../api";
 
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
@@ -9,7 +14,6 @@ export const fetchOrders = createAsyncThunk(
   }
 );
 
-
 export const deleteProduct = createAsyncThunk(
   "orders/deleteProduct",
   async (id, { dispatch }) => {
@@ -18,12 +22,18 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
-
-
 export const updateOrderStatusInStore = createAsyncThunk(
   "orders/updateOrderStatus",
   async ({ id, status }, { dispatch }) => {
     await updateOrderStatus(id, status);
+    dispatch(fetchOrders());
+  }
+);
+
+export const addCommentToOrder = createAsyncThunk(
+  "orders/addComment",
+  async ({ id, comment }, { dispatch }) => {
+    await updateOrderComment(id, comment);
     dispatch(fetchOrders());
   }
 );
