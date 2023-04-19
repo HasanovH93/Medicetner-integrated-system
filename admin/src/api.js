@@ -34,12 +34,19 @@ export const login = async (email, password) => {
   }
 };
 
-export const fetchOrder = async (orderId, setOrder) => {
+export const updateOrderStatus = async (orderId, status) => {
+  console.log(orderId);
+  console.log(API_URL);
   try {
-    console.log(orderId);
-    const response = await axiosInstance.get(`${API_URL}/single/${orderId}`);
-    setOrder(response.data.data);
+    const response = await axiosInstance.patch(
+      `${API_URL}/orders/single/${orderId}`,
+      {
+        status,
+      }
+    );
+    return response.data;
   } catch (error) {
-    console.error("Error fetching order data:", error);
+    console.error("Error updating order status:", error);
+    throw error;
   }
 };

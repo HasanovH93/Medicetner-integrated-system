@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import { Grid, FormControlLabel, Checkbox, TextField } from "@mui/material";
 
-const ArbeitsunfähigkeitsbescheinigungCheckbox = ({
-  formData,
-  handleChange,
-}) => {
-  const [
-    showArbeitsunfähigkeitsbescheinigungFields,
-    setShowArbeitsunfähigkeitsbescheinigungFields,
-  ] = useState(false);
+const AuCheckbox = ({ formData, handleChange }) => {
+  const [showAugFields, setShowAuFields] = useState(false);
 
-  const handleArbeitsunfähigkeitsbescheinigungChange = (event) => {
-    setShowArbeitsunfähigkeitsbescheinigungFields(event.target.checked);
+  const handleAuChange = (event) => {
+    setShowAuFields(event.target.checked);
     handleChange({
       target: {
-        name: "arbeitsunfähigkeitsbescheinigung",
+        name: "Arbeitsunfähigkeitsbescheinigung",
         type: "checkbox",
         checked: event.target.checked,
       },
@@ -27,18 +21,18 @@ const ArbeitsunfähigkeitsbescheinigungCheckbox = ({
         <FormControlLabel
           control={
             <Checkbox
-              onChange={handleArbeitsunfähigkeitsbescheinigungChange}
-              name="arbeitsunfähigkeitsbescheinigung"
+              onChange={handleAuChange}
+              name="Arbeitsunfähigkeitsbescheinigung"
             />
           }
           label="Arbeitsunfähigkeitsbescheinigung"
         />
       </Grid>
-      {showArbeitsunfähigkeitsbescheinigungFields && (
+      {showAugFields && (
         <Grid container spacing={2}>
           <Grid item>
             <TextField
-              name="arbeitsunfähigkeitsbescheinigung.dateFrom"
+              name="Arbeitsunfähigkeitsbescheinigung.dateFrom"
               value={formData.dateFrom}
               onChange={handleChange}
               id="formDateFrom"
@@ -51,7 +45,7 @@ const ArbeitsunfähigkeitsbescheinigungCheckbox = ({
           </Grid>
           <Grid item>
             <TextField
-              name="arbeitsunfähigkeitsbescheinigung.dateTo"
+              name="Arbeitsunfähigkeitsbescheinigung.dateTo"
               value={formData.chosenCheckboxes["dateTo"]}
               onChange={handleChange}
               id="formDateTo"
@@ -67,7 +61,7 @@ const ArbeitsunfähigkeitsbescheinigungCheckbox = ({
               id="formGrund"
               label="Grund"
               placeholder="Grund"
-              name="arbeitsunfähigkeitsbescheinigung.grund"
+              name="Arbeitsunfähigkeitsbescheinigung.grund"
               value={formData.grund}
               onChange={handleChange}
             />
@@ -78,4 +72,4 @@ const ArbeitsunfähigkeitsbescheinigungCheckbox = ({
   );
 };
 
-export default ArbeitsunfähigkeitsbescheinigungCheckbox;
+export default AuCheckbox;

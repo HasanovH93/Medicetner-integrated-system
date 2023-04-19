@@ -6,15 +6,15 @@ import {
   Radio,
   RadioGroup,
   Typography,
+  TextField,
 } from "@mui/material";
 
 const Heilmittel = ({ formData, handleChange }) => {
-  const [showHeilmittelverordnungFields, setShowHeilmittelverordnungFields] =
-    useState(false);
+  const [showHlFields, setShowHlFields] = useState(false);
 
   const handleHeilmittelverordnungChange = (event) => {
     const isChecked = event.target.checked;
-    setShowHeilmittelverordnungFields(isChecked);
+    setShowHlFields(isChecked);
 
     handleChange(event);
   };
@@ -27,17 +27,21 @@ const Heilmittel = ({ formData, handleChange }) => {
         <FormControlLabel
           control={
             <Checkbox
-              name="Heilmittel"
+              name="Heilmittelverordnung"
               onChange={handleHeilmittelverordnungChange}
             />
           }
           label="Heilmittelverordnung"
         />
       </Grid>
-      {showHeilmittelverordnungFields && (
+      {showHlFields && (
         <Grid container spacing={2}>
           <Grid item>
-            <RadioGroup row name="Heilmittel.therapie" onChange={handleChange}>
+            <RadioGroup
+              row
+              name="Heilmittelverordnung.therapie"
+              onChange={handleChange}
+            >
               <FormControlLabel
                 control={<Radio />}
                 label={
@@ -84,6 +88,16 @@ const Heilmittel = ({ formData, handleChange }) => {
                 value="Ernährungstherapie"
               />
             </RadioGroup>
+            <Grid item>
+              <TextField
+                id="formGrund"
+                label="Grund"
+                placeholder="Grund"
+                name="Heilmittelverordnung.grund"
+                value={formData.grund}
+                onChange={handleChange}
+              />
+            </Grid>
           </Grid>
         </Grid>
       )}

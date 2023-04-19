@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteOrderById, fetchAllOrders } from "../../api";
+import { deleteOrderById, fetchAllOrders, updateOrderStatus } from "../../api";
 
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
@@ -9,10 +9,21 @@ export const fetchOrders = createAsyncThunk(
   }
 );
 
+
 export const deleteProduct = createAsyncThunk(
   "orders/deleteProduct",
   async (id, { dispatch }) => {
     await deleteOrderById(id);
+    dispatch(fetchOrders());
+  }
+);
+
+
+
+export const updateOrderStatusInStore = createAsyncThunk(
+  "orders/updateOrderStatus",
+  async ({ id, status }, { dispatch }) => {
+    await updateOrderStatus(id, status);
     dispatch(fetchOrders());
   }
 );

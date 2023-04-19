@@ -22,6 +22,7 @@ const OrderList = ({ orders }) => {
             <TableCell>Vorname</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Geburtsdatum</TableCell>
+            <TableCell>Status</TableCell>
             <TableCell>View</TableCell>
             <TableCell>Delete</TableCell>
           </TableRow>

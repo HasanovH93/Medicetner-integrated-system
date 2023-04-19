@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Grid, TextField, Button, Typography } from "@mui/material";
-import ArbeitsunfähigkeitsbescheinigungCheckbox from "./checkboxes/Au";
+import Aucheckbox from "./checkboxes/Au";
 import Heilmittel from "./checkboxes/Heilmittel";
 import Medikamente from "./checkboxes/Medikamente";
 import styles from "./SimpleForm.module.css";
@@ -20,73 +20,49 @@ const CustomForm = () => {
   });
 
   const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
+    const { name, value, type } = event.target;
 
-    if (type === "checkbox") {
+    if (name.includes(".")) {
+      const [parent, child] = name.split(".");
       setFormData((prevFormData) => {
-        const existingCheckboxIndex = prevFormData.chosenCheckboxes.findIndex(
-          (item) => item.hasOwnProperty(name)
+        const checkboxIndex = prevFormData.chosenCheckboxes.findIndex(
+          (checkbox) => checkbox.hasOwnProperty(parent)
         );
 
-        let updatedChosenCheckboxes;
-
-        if (checked) {
-          if (existingCheckboxIndex === -1) {
-            updatedChosenCheckboxes = [
-              ...prevFormData.chosenCheckboxes,
-              { [name]: {} },
-            ];
-          } else {
-            updatedChosenCheckboxes = prevFormData.chosenCheckboxes;
-          }
-        } else {
-          updatedChosenCheckboxes = prevFormData.chosenCheckboxes.filter(
-            (item) => !item.hasOwnProperty(name)
-          );
+        let updatedChosenCheckboxes = [...prevFormData.chosenCheckboxes];
+        if (checkboxIndex !== -1) {
+          updatedChosenCheckboxes[checkboxIndex] = {
+            ...updatedChosenCheckboxes[checkboxIndex],
+            [parent]: {
+              ...updatedChosenCheckboxes[checkboxIndex][parent],
+              [child]: value,
+            },
+          };
+        } else if (value !== "") {
+          updatedChosenCheckboxes = [
+            ...updatedChosenCheckboxes,
+            { [parent]: { [child]: value } },
+          ];
         }
 
         return {
           ...prevFormData,
-          chosenCheckboxes: updatedChosenCheckboxes,
+          chosenCheckboxes: updatedChosenCheckboxes.filter((checkbox) => {
+            const key = Object.keys(checkbox)[0];
+            return Object.keys(checkbox[key]).length > 0;
+          }),
         };
       });
-    } else {
-      if (name.includes(".")) {
-        setFormData((prevFormData) => {
-          const updatedChosenCheckboxes = prevFormData.chosenCheckboxes.map(
-            (item) => {
-              if (item.hasOwnProperty(name.split(".")[0])) {
-                return {
-                  ...item,
-                  [name.split(".")[0]]: {
-                    ...item[name.split(".")[0]],
-                    [name.split(".")[1]]: value,
-                  },
-                };
-              } else {
-                return item;
-              }
-            }
-          );
-
-          return {
-            ...prevFormData,
-            chosenCheckboxes: updatedChosenCheckboxes,
-          };
-        });
-      } else {
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          [name]: value,
-        }));
-      }
+    } else if (type !== "checkbox") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Send formData to the server
     createOrder(formData);
   };
 
@@ -181,12 +157,12 @@ const CustomForm = () => {
                 onChange={handleChange}
               >
                 <Grid item>
-                  <ArbeitsunfähigkeitsbescheinigungCheckbox
+                  <Aucheckbox formData={formData} handleChange={handleChange} />
+                  <Heilmittel formData={formData} handleChange={handleChange} />
+                  <Medikamente
                     formData={formData}
                     handleChange={handleChange}
                   />
-                  <Heilmittel formData={formData} handleChange={handleChange} />
-                  <Medikamente />
                 </Grid>
               </Grid>
             </Grid>

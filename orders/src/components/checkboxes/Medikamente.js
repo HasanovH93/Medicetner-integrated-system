@@ -10,12 +10,13 @@ import {
 import AddIcon from "@mui/icons-material/AddCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const Medikamente = () => {
+const Medikamente = ({ formData, handleChange }) => {
   const [showMedikamenteFields, setShowMedikamenteFields] = useState(false);
   const [medikamenteFields, setMedikamenteFields] = useState([{ id: 1 }]);
 
   const handleMedikamenteChange = (event) => {
     setShowMedikamenteFields(event.target.checked);
+    handleChange(event);
   };
 
   const addMedikamenteFields = () => {
@@ -23,10 +24,24 @@ const Medikamente = () => {
       ...medikamenteFields,
       { id: medikamenteFields.length + 1 },
     ]);
+    handleChange({
+      target: {
+        type: "checkbox",
+        name: `Medikamente.formMedikament${medikamenteFields.length + 1}`,
+        checked: true,
+      },
+    }); 
   };
 
   const removeMedikamenteFields = (id) => {
     setMedikamenteFields(medikamenteFields.filter((field) => field.id !== id));
+    handleChange({
+      target: {
+        type: "checkbox",
+        name: `Medikamente.formMedikament${id}`,
+        checked: false,
+      },
+    }); // Add this line
   };
 
   return (
@@ -44,18 +59,22 @@ const Medikamente = () => {
               <Grid container spacing={2} key={field.id} alignItems="center">
                 <Grid item xs={6} sm={3}>
                   <TextField
-                    id={`formMedikament${field.id}`}
+                    id={`Medikamente.Medikament${field.id}`}
+                    name={`Medikamente. Medikament${field.id}`}
                     label={`Medikament ${field.id}`}
                     placeholder="Medikament"
                     fullWidth
+                    onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={6} sm={3}>
                   <TextField
-                    id={`formDosierung${field.id}`}
+                    id={`Medikamente.Dosierung${field.id}`}
+                    name={`Medikamente.Dosierung${field.id}`}
                     label={`Dosierung ${field.id}`}
                     placeholder="Dosierung"
                     fullWidth
+                    onChange={handleChange}
                   />
                 </Grid>
                 <Grid item container xs={6} sm={4} alignItems="center">

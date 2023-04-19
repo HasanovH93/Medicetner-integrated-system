@@ -1,4 +1,4 @@
-import OrderCard from "../SingleOrder/SingleOrder";
+import OrderCard from "../../components/OrderCard/SingleOrder";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./OrderPage.module.scss";
